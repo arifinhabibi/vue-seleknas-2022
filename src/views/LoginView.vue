@@ -68,10 +68,13 @@ import axios from 'axios';
                     localStorage.setItem('token', response.data.token)
                     localStorage.setItem('name', response.data.name)
 
+                    console.log(response)
+                    
                     this.$router.push('/')
                 }
-            ).catch(
-                error => {
+                ).catch(
+                    error => {
+                    console.log(error)
                     alert(error.response.data.message)
                 }
             )

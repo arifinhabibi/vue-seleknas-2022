@@ -26,7 +26,7 @@
                                   <h5 class="mb-0">Data Validation</h5>
                               </div>
                               <div class="card-body">
-                                  <a href="" class="btn btn-primary btn-block">+ Request validation</a>
+                                  <router-link to="/request-validation" class="btn btn-primary btn-block">+ Request validation</router-link>
                               </div>
                           </div>
                       </div>
@@ -57,15 +57,15 @@
                                       </tr>
                                       <tr>
                                           <th>Reason Accepted</th>
-                                          <td class="text-muted">{{ reason_accepted }}</td>
+                                          <td class="text-muted">{{ reason_accepted == null ? '-' : reason_accepted }}</td>
                                       </tr>
                                       <tr>
                                           <th>Validator</th>
-                                          <td class="text-muted">{{ validator }}</td>
+                                          <td class="text-muted">{{ validator == null ? '-' : validator }}</td>
                                       </tr>
                                       <tr>
                                           <th>Validator Notes</th>
-                                          <td class="text-muted">{{ validator_notes }}</td>
+                                          <td class="text-muted">{{ validator_notes == null ? '-' : validator_notes }}</td>
                                       </tr>
                                   </table>
                               </div>
@@ -87,7 +87,7 @@
                               <h4 class="section-title text-muted">My Job Applications</h4>
                           </div>
                           <div class="col-md-4" v-if="status == 'accepted'">
-                              <a href="" class="btn btn-primary btn-lg btn-block">+ Add Job Applications</a>
+                              <router-link to="/job-vacancies" class="btn btn-primary btn-lg btn-block">+ Add Job Applications</router-link>
                           </div>
                       </div>
                   </div>
@@ -179,14 +179,14 @@ export default {
         getDataValidation(token){
           axios.get(`http://127.0.0.1:8000/api/v1/validations?token=${token}`).then(
             response => {
-              // console.log(response)
+                // console.log(response)
+                this.validation = true
               this.status = response.data.status
               this.job_category = response.data.category.job_category
               this.job_position = response.data.job_position
               this.reason_accepted = response.data.reason_accepted
               this.validator = response.data.validator.name
               this.validator_notes = response.data.validator_notes
-              this.validation = true
             }
             ).catch(
             error => {
